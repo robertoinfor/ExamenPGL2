@@ -30,7 +30,7 @@ fun MainView(color: Color){
     Scaffold (
         topBar = {
             CenterAlignedTopAppBar(
-                title = { TitleBar(name = "Conversación Roberto") },
+                title = { TitleBar(name = "Conversación Roberto", color) },
                 colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
                     containerColor = Color.Blue
                 ))
@@ -39,11 +39,10 @@ fun MainView(color: Color){
         Column (
             modifier = Modifier
                 .fillMaxSize()
-                .wrapContentSize(Alignment.TopCenter)
-                .padding(100.dp, 30.dp)
+                .wrapContentSize(Alignment.Center)
         ){
             MainCard(nombre = "Roberto", imagen = R.drawable.avatar2)
-            BotonColor(color = MaterialTheme.colorScheme.primary)
+            BotonColor(color = Color.Magenta)
             Conversation(messages = Mensajes.conversationSample)
         }
 

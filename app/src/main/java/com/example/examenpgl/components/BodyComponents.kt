@@ -61,7 +61,7 @@ fun MessageCard(msg: Message) {
 
         var isExpanded by remember { mutableStateOf(false) }
         val surfaceColor by animateColorAsState(
-            if (isExpanded) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.surface,
+            if (isExpanded) Color.Magenta else MaterialTheme.colorScheme.surface,
         )
 
         Column(modifier = Modifier.clickable { isExpanded = !isExpanded }) {
@@ -109,56 +109,51 @@ fun MainCard(nombre: String, imagen: Int, modifier: Modifier = Modifier) {
         colors = CardDefaults.cardColors(
             containerColor = Color.LightGray
         )
+
     ) {
-        Row(
+        Column(
             modifier = Modifier
                 .padding(5.dp)
                 .fillMaxWidth()
                 .wrapContentSize(Alignment.Center)
         ) {
-            Column (modifier = Modifier
-                    .height(50.dp)
-                    .wrapContentSize(Alignment.Center)
-                    .padding(horizontal = 5.dp)
-            ) {
-                Image(
-                    painter = painterResource(imagen),
-                    contentDescription = null,
-                    modifier = Modifier
-                        .size(40.dp)
-                        .clip(CircleShape)
-                        .border(1.5.dp, MaterialTheme.colorScheme.secondary, CircleShape)
-                )
-            }
-            Column ( modifier = Modifier
-                .fillMaxWidth()
-                .height(50.dp)
-                .wrapContentSize(Alignment.Center)
-                .padding(horizontal = 5.dp)
-            ) {
-                Text(text = "Alumno: $nombre", modifier = Modifier
+            Image(
+                painter = painterResource(imagen),
+                contentDescription = null,
+                modifier = Modifier
+                    .size(40.dp)
+                    .clip(CircleShape)
+                    .border(1.5.dp, MaterialTheme.colorScheme.secondary, CircleShape)
+            )
+            Text(
+                text = "Alumno: $nombre", modifier = Modifier
                     .size(30.dp)
-                )
-            }
+            )
+            SpaceW(3.dp)
+            Text(
+                text = "Soy un alumno", modifier = Modifier
+                    .size(20.dp)
+            )
         }
     }
 }
-
 
 @Composable
 fun BotonColor(color: Color) {
     val listaColores = listOf(Color.Green, Color.Blue, Color.Red, Color.Cyan)
     val random = (0..3).random()
     val newColor = listaColores[random]
-    var color2 by remember { mutableStateOf(color)}
-    Row (
+    var color2 by remember { mutableStateOf(Color.Transparent) }
+    Row(
         modifier = Modifier
             .fillMaxWidth()
             .wrapContentSize(Alignment.Center)
-    ){
-        Button(onClick = { color2=newColor }, colors = ButtonDefaults.buttonColors(
-            containerColor = if(newColor != color2) newColor else color2
-        )) {
+    ) {
+        Button(
+            onClick = { color2 = newColor }, colors = ButtonDefaults.buttonColors(
+                containerColor = if (color2 != Color.Transparent) newColor else color
+            )
+        ) {
             Text(text = "Cambiar color")
         }
     }

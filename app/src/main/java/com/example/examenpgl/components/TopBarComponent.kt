@@ -7,6 +7,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun TitleBar(name: String){
-    Text(text = name, fontSize = 30.sp, fontWeight = FontWeight.Bold, color = Color.Gray)
+fun TitleBar(name: String, color:Color){
+    Text(text = name, fontSize = 30.sp, fontWeight = FontWeight.Bold, color = color)
 }
