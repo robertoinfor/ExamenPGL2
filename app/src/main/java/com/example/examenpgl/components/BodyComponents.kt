@@ -112,10 +112,11 @@ fun MainCard(nombre: String, imagen: Int, modifier: Modifier = Modifier) {
 
     ) {
         Column(
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
-                .padding(5.dp)
+                .padding(16.dp)
                 .fillMaxWidth()
-                .wrapContentSize(Alignment.Center)
         ) {
             Image(
                 painter = painterResource(imagen),
@@ -126,13 +127,11 @@ fun MainCard(nombre: String, imagen: Int, modifier: Modifier = Modifier) {
                     .border(1.5.dp, MaterialTheme.colorScheme.secondary, CircleShape)
             )
             Text(
-                text = "Alumno: $nombre", modifier = Modifier
-                    .size(30.dp)
+                text = "Alumno: $nombre"
             )
             SpaceW(3.dp)
             Text(
-                text = "Soy un alumno", modifier = Modifier
-                    .size(20.dp)
+                text = "Soy un alumno"
             )
         }
     }
