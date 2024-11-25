@@ -9,14 +9,14 @@ object Mensajes {
         ),
         Message(
             "Profesor",
-            """Con este ejercicio practican:\n" +
+            "Con este ejercicio practican:\n" +
                     "Lo que vimos del instructivo, de hecho pueden partir de ahí\n" +
                     "De la aplicación de loterías cómo hacer observables, con variables que se leen en tiempo de ejecución\n" +
                     "También del de loterías cómo seleccionar un elemento aleatorio de una lista\n" +
                     "Los botones lo hemos visto en varios proyectos\n" +
                     "Así como el lazyrow y cómo modificar el layout\n" +
                     "También hemos visto cómo crear componentes que pueden cambiar dependiendo de los parámetros\n" +
-                    "Espero que les sirva de ayuda)\n"""
+                    "Espero que les sirva de ayuda)\n"
         ),
         Message(
             "Profesor",

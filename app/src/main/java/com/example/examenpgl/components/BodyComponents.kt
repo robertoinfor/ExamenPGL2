@@ -3,10 +3,12 @@ package com.example.examenpgl.components
 import android.media.Image
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.animateContentSize
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -43,10 +45,11 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.examenpgl.R
+import com.example.examenpgl.data.Mensajes
 import com.example.examenpgl.data.Message
 
 @Composable
-fun MessageCard(msg: Message) {
+fun MessageCard(msg: Message, color: Color) {
     Row(modifier = Modifier.padding(all = 8.dp)) {
         Image(
             painter = painterResource(R.drawable.profesor),
@@ -57,11 +60,11 @@ fun MessageCard(msg: Message) {
                 .border(1.5.dp, MaterialTheme.colorScheme.secondary, CircleShape)
         )
 
-        Spacer(modifier = Modifier.width(8.dp))
+        SpaceW(8.dp)
 
         var isExpanded by remember { mutableStateOf(false) }
         val surfaceColor by animateColorAsState(
-            if (isExpanded) Color.Magenta else MaterialTheme.colorScheme.surface,
+            if (isExpanded) color else Color.LightGray,
         )
 
         Column(modifier = Modifier.clickable { isExpanded = !isExpanded }) {
@@ -71,8 +74,7 @@ fun MessageCard(msg: Message) {
                 style = MaterialTheme.typography.titleSmall
             )
 
-            Spacer(modifier = Modifier.height(4.dp))
-
+            SpaceH(4.dp)
             Surface(
                 shape = MaterialTheme.shapes.medium,
                 shadowElevation = 1.dp,
@@ -93,10 +95,10 @@ fun MessageCard(msg: Message) {
 }
 
 @Composable
-fun Conversation(messages: List<Message>) {
+fun Conversation(messages: List<Message>, color: Color) {
     LazyColumn {
         items(messages) { message ->
-            MessageCard(message)
+            MessageCard(message, color)
         }
     }
 }
@@ -106,56 +108,65 @@ fun Conversation(messages: List<Message>) {
 fun MainCard(nombre: String, imagen: Int, modifier: Modifier = Modifier) {
     Card(
         modifier = modifier,
+        shape = RectangleShape,
+        border = BorderStroke(1.dp, Color.Gray),
         colors = CardDefaults.cardColors(
             containerColor = Color.LightGray
         )
 
     ) {
-        Column(
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier
-                .padding(16.dp)
-                .fillMaxWidth()
-        ) {
-            Image(
-                painter = painterResource(imagen),
-                contentDescription = null,
-                modifier = Modifier
-                    .size(40.dp)
-                    .clip(CircleShape)
-                    .border(1.5.dp, MaterialTheme.colorScheme.secondary, CircleShape)
-            )
-            Text(
-                text = "Alumno: $nombre"
-            )
-            SpaceW(3.dp)
-            Text(
-                text = "Soy un alumno"
-            )
+        Box {
+                Row(
+                    modifier = Modifier
+                        .padding(16.dp)
+                        .fillMaxWidth()
+                        .wrapContentSize(Alignment.TopStart )
+                ) {
+                    Image(
+                        painter = painterResource(imagen),
+                        contentDescription = null,
+                        modifier = Modifier
+                            .size(50.dp)
+                            .clip(CircleShape)
+                            .border(1.5.dp, MaterialTheme.colorScheme.secondary, CircleShape)
+                    )
+                    SpaceW(5.dp)
+                    Column {
+                        Text(
+                            text = "Alumno: $nombre",
+                            fontSize = 25.sp
+                        )
+                        SpaceW(3.dp)
+                        Text(
+                            text = "Soy un alumno",
+                            fontSize = 20.sp
+                        )
+                    }
+                }
         }
     }
 }
 
 @Composable
-fun BotonColor(color: Color) {
+fun BotonColor(texto: String, color: Color) {
     val listaColores = listOf(Color.Green, Color.Blue, Color.Red, Color.Cyan)
     val random = (0..3).random()
     val newColor = listaColores[random]
-    var color2 by remember { mutableStateOf(Color.Transparent) }
+    var color2 by remember { mutableStateOf(Color.Magenta) }
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .wrapContentSize(Alignment.Center)
     ) {
-        Button(
+        Button( modifier = Modifier.fillMaxWidth().padding(20.dp, 5.dp),
             onClick = { color2 = newColor }, colors = ButtonDefaults.buttonColors(
-                containerColor = if (color2 != Color.Transparent) newColor else color
+                containerColor = if (color2 != Color.Magenta) color2 else color
             )
         ) {
-            Text(text = "Cambiar color")
+            Text(text = texto)
         }
     }
+    Conversation(messages = Mensajes.conversationSample, color2)
 }
 
 

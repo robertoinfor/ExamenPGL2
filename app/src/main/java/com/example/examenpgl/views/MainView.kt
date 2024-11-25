@@ -39,11 +39,11 @@ fun MainView(color: Color){
         Column (
             modifier = Modifier
                 .fillMaxSize()
-                .wrapContentSize(Alignment.Center)
+                .wrapContentSize(Alignment.TopStart)
+                .padding(30.dp, 100.dp)
         ){
             MainCard(nombre = "Roberto", imagen = R.drawable.avatar2)
-            BotonColor(color = Color.Magenta)
-            Conversation(messages = Mensajes.conversationSample)
+            BotonColor("Elegir nuevo color", color = Color.Magenta)
         }
 
     }
