@@ -150,17 +150,19 @@ fun MainCard(nombre: String, imagen: Int, modifier: Modifier = Modifier) {
 @Composable
 fun BotonColor(texto: String, color: Color) {
     val listaColores = listOf(Color.Green, Color.Blue, Color.Red, Color.Cyan)
-    val random = (0..3).random()
-    val newColor = listaColores[random]
-    var color2 by remember { mutableStateOf(Color.Magenta) }
+    var color2 by remember { mutableStateOf(color) }
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .wrapContentSize(Alignment.Center)
     ) {
         Button( modifier = Modifier.fillMaxWidth().padding(20.dp, 5.dp),
-            onClick = { color2 = newColor }, colors = ButtonDefaults.buttonColors(
-                containerColor = if (color2 != Color.Magenta) color2 else color
+            onClick = {
+                val random = (0..3).random()
+                val newColor = listaColores[random]
+                color2 = newColor
+                      }, colors = ButtonDefaults.buttonColors(
+                containerColor = color2
             )
         ) {
             Text(text = texto)
